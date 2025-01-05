@@ -1,13 +1,17 @@
 
-# Dynamic Flowchart (using javascript)
+# Dynamic MPOP Flowchart (using javascript)
 
-This repository contains a dynamic flowchart (graph)
+**Author:** Hamza Ansari
+**Published:** 01/03/2025
+
+# Purpose
+Displays all MPOP trials in a succint manner via a dynamic flowchart (graph)
 
 ## Getting Started
 
 1. **Clone or download** this repository to your local machine:
    ```bash
-   git clone https://github.com/your-username/dynamic-flowchart.git
+   git clone https://github.com/hdementor/mpop-flowchart.git
    ```
 
 2. **Install a local development server with auto-reload.** 
@@ -15,7 +19,7 @@ This repository contains a dynamic flowchart (graph)
    1. Ensure you have [Node.js](https://nodejs.org/) installed.  
    2. In your project folder, initialize an npm project if you haven’t already:
       ```bash
-      cd dynamic-flowchart
+      cd mpop-flowchart
       npm init -y
       ```
    3. Install **live-server** as a dev dependency:
@@ -49,7 +53,7 @@ You can easily host this static site on **GitHub Pages**:
 3. Under **"Pages"** (or **"Pages and Branches"**), select the **branch** you want to deploy from (typically `main`) and choose the root folder (`/`).  
 4. Wait a few seconds; GitHub Pages will provide a URL like:
    ```
-   https://your-username.github.io/dynamic-flowchart/
+   https://hdementor.github.io/mpop-flowchart/
    ```
 5. Navigate to that URL, and you’ll see your app!
 
