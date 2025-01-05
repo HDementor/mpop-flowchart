@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STATIC MPOP Clinical Trials - Dynamic Flowchart</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Cytoscape Libraries -->
+  <script src="libs/cytoscape.min.js"></script>
+  <script src="libs/dagre.min.js"></script>
+  <script src="libs/cytoscape-dagre.js"></script>
+  <script src="libs/popper.min.js"></script>
+  <script src="libs/tippy.umd.js"></script>
+  <script src="libs/cytoscape-popper.js"></script>
+</head>
+<body>
+  <div id="header">
+    <img src="popcorn-logo.jpg" alt="MPOP Logo">
+    <h1>STATIC - MPOP Clinical Trials - Dynamic Flowchart</h1>
+  </div>
+
+  <div id="container">
+    <div id="graph-panel">
+      <div id="cy"></div>
+    </div>
+    <div id="controls-panel">
+      <div>
+        <label for="oncology-category">Oncology Category:</label>
+        <select id="oncology-category">
+          <option value="All (active trials)">All (active trials)</option>
+         <!-- <option value="All">All</option> -->
+          <option value="All_fully_expanded">All Fully Expanded</option>
+          <option value="Breast">Breast</option>
+          <option value="GI">GI</option>
+          <option value="GU">GU</option>
+          <option value="Gyn_Onc">Gyn/Onc</option>
+          <option value="HN">HN</option>
+          <option value="Lung_Thoracic">Lung_Thoracic</option>
+          <option value="Melanoma_Cutaneous_Sarcoma">Melanoma_Cutaneous_Sarcoma</option>
+          <option value="Rad_Onc">Rad_Onc</option>
+          <option value="Tumor_Agnostic">Tumor_Agnostic</option>
+        </select>
+      </div>
+      <button id="render-graph">Render Graph</button>
+    </div>
+  </div>
+
+  <div id="log-panel">
+    <h3>Logs:</h3>
+    <div id="logs" style="overflow-y: auto; height: 100px; border: 1px solid #ccc; padding: 5px;"></div>
+    <button id="clear-logs" style="margin-top: 5px;">Clear Logs</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

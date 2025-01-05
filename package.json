@@ -1,0 +1,15 @@
+{
+  "name": "dynamic-flowchart",
+  "version": "1.0.0",
+  "description": "This repository contains a minimal example of visualizing a graph in **Cytoscape.js** using a **NetworkX-compatible** JSON file (`data.json`).",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

@@ -1,0 +1,5 @@
+networkx
+flask-cors
+pandas
+flask
+jsonify

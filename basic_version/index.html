@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BASIC</title>
+
+  <!-- Cytoscape core library -->
+  <script src="https://unpkg.com/cytoscape@3.23.0/dist/cytoscape.min.js"></script>
+  <script src="https://unpkg.com/dagre@0.8.5/dist/dagre.min.js"></script>
+  <script src="https://unpkg.com/cytoscape-dagre@2.4.0/cytoscape-dagre.js"></script>
+
+  <!-- Popper.js and Tippy.js -->
+  <script src="https://unpkg.com/@popperjs/core@2.11.6/dist/popper.min.js"></script>
+  <script src="https://unpkg.com/tippy.js@6.3.7/dist/tippy.umd.js"></script>
+
+  <!-- Local Cytoscape-Popper -->
+  <script src="libs/cytoscape-popper.js"></script>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    #header {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #0078d4;
+      color: white;
+    }
+
+    #header img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    #header h1 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    #cy {
+      width: 100%;
+      height: calc(100% - 70px);
+      display: block;
+    }
+
+    .tooltip-content a {
+      color: #0078d4;
+      text-decoration: underline;
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: #005a9e;
+    }
+  </style>
+</head>
+<body>
+  <div id="header">
+    <img src="popcorn-logo.jpg" alt="MPOP Logo">
+    <h1>MPOP Clinical Trials</h1>
+  </div>
+  <div id="cy"></div>
+  <script src="app.js"></script>
+</body>
+</html>

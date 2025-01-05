@@ -1,0 +1,65 @@
+oncology_category,study_type,trial_phase,therapy_line,trial_code,trial_description,hyperlink
+HN,Interventional,Neoadjuvant Trials,,,,
+HN,Interventional,Adjuvant Trials,,,,
+HN,Interventional,Metastatic Trials,Line1,GS-1811,blah blah,https://google.com
+HN,Interventional,Metastatic Trials,Line2,SGNDV-005 (Cohort 1),blah blah,https://google.com
+HN,Interventional,Metastatic Trials,Line2,ABBV-CLS-484,blah blah,https://google.com
+HN,Interventional,Metastatic Trials,Line3+,ABBV-CLS-484,blah blah,https://google.com
+HN,Non-Interventional,Postop/Adjuvant,,,,
+HN,Non-Interventional,Metastatic Trials,,,,
+Breast,Interventional,Neoadjuvant Trials,,,,
+Breast,Interventional,Adjuvant Trials,,,,
+Breast,Interventional,Metastatic Trials,Line1,,,
+Breast,Interventional,Metastatic Trials,Line2,,,
+Breast,Interventional,Metastatic Trials,Line3+,,,
+Breast,Non-Interventional,Postop/Adjuvant,No Line,Oracle (Cohort 3),Following ctDNA Across Multiple Solid Tumors Using Guardant MRD Assay (Cohort 3),https://365utsouthwestern.sharepoint.com/:u:/r/sites/MPOPClinicalTrials/SitePages/Following-ctDNA-Across-Multiple-Solid-Tumors-Using-Guardant-MRD-Assay-(Cohort-3).aspx
+Breast,Non-Interventional,Metastatic Trials,No Line,SIBYL,blah blah,https://365utsouthwestern.sharepoint.com/:u:/r/sites/MPOPClinicalTrials/SitePages/SIBYL%20(Breast).aspx
+GI,Interventional,Neoadjuvant Trials,,,,
+GI,Interventional,Adjuvant Trials,,,,
+GI,Interventional,Metastatic Trials,Line1,XL092-002 (Cohort 7),blah blah,https://google.com
+GI,Interventional,Metastatic Trials,Line2,,,
+GI,Interventional,Metastatic Trials,Line3+,,,
+GI,Non-Interventional,Postop/Adjuvant,No Line,Oracle (Cohorts 5/6/7/12),blah blah,https://google.com
+GI,Non-Interventional,Metastatic Trials,No Line,SIBYL,blah blah,https://google.com
+GU,Interventional,Neoadjuvant Trials,,,,
+GU,Interventional,Adjuvant Trials,,,,
+GU,Interventional,Metastatic Trials,Line1,XL092-002 (Cohort 6),blah blah,https://google.com
+GU,Interventional,Metastatic Trials,Line2,,,
+GU,Interventional,Metastatic Trials,Line3+,,,
+GU,Non-Interventional,Postop/Adjuvant,No Line,Oracle (Cohorts 1/11),blah blah,https://google.com
+GU,Non-Interventional,Metastatic Trials,,,,
+Gyn/Onc,Interventional,Neoadjuvant Trials,,,,
+Gyn/Onc,Interventional,Adjuvant Trials,,,,
+Gyn/Onc,Interventional,Metastatic Trials,Line1,,,
+Gyn/Onc,Interventional,Metastatic Trials,Line2,,,
+Gyn/Onc,Interventional,Metastatic Trials,Line3+,GS-1811,blah blah,https://google.com
+Gyn/Onc,Non-Interventional,Postop/Adjuvant,No Line,Oracle (Cohorts 9/10),blah blah,https://google.com
+Gyn/Onc,Non-Interventional,Metastatic Trials,,,,
+Lung/Thoracic,Interventional,Neoadjuvant Trials,,,,
+Lung/Thoracic,Interventional,Adjuvant Trials,,,,
+Lung/Thoracic,Interventional,Metastatic Trials,Line1,,,
+Lung/Thoracic,Interventional,Metastatic Trials,Line2,,,
+Lung/Thoracic,Interventional,Metastatic Trials,Line3+,,,
+Lung/Thoracic,Non-Interventional,Postop/Adjuvant,No Line,Oracle (Cohort 2),blah blah,https://google.com
+Lung/Thoracic,Non-Interventional,Metastatic Trials,,,,
+Melanoma/Cutaneous/Sarcoma,Interventional,Neoadjuvant Trials,,,,
+Melanoma/Cutaneous/Sarcoma,Interventional,Adjuvant Trials,,,,
+Melanoma/Cutaneous/Sarcoma,Interventional,Metastatic Trials,Line1,,,
+Melanoma/Cutaneous/Sarcoma,Interventional,Metastatic Trials,Line2,,,
+Melanoma/Cutaneous/Sarcoma,Interventional,Metastatic Trials,Line3+,,,
+Melanoma/Cutaneous/Sarcoma,Non-Interventional,Postop/Adjuvant,,,,
+Melanoma/Cutaneous/Sarcoma,Non-Interventional,Metastatic Trials,,,,
+Rad/Onc,Interventional,Neoadjuvant Trials,,,,
+Rad/Onc,Interventional,Adjuvant Trials,,,,
+Rad/Onc,Interventional,Metastatic Trials,Line1,,,
+Rad/Onc,Interventional,Metastatic Trials,Line2,,,
+Rad/Onc,Interventional,Metastatic Trials,Line3+,,,
+Rad/Onc,Non-Interventional,Postop/Adjuvant,,,,
+Rad/Onc,Non-Interventional,Metastatic Trials,,,,
+Tumor Agnostic,Interventional,Non-Metastatic,,,,
+Tumor Agnostic,Interventional,Metastatic,No Line,NCI AIM NIVO,blah blah,https://google.com
+Tumor Agnostic,Interventional,Metastatic,No Line,LOXO-Libretto-001,blah blah,https://google.com
+Tumor Agnostic,Interventional,Other,No Line,SWOG 2012,blah blah,https://google.com
+Tumor Agnostic,Interventional,Other,No Line,Atrium,blah blah,https://google.com
+Tumor Agnostic,Non-Interventional,Postop/Adjuvant,,,,
+Tumor Agnostic,Non-Interventional,Metastatic Trials,,,,

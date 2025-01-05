@@ -1,0 +1,67 @@
+{
+    "style": [
+      {
+        "selector": "node",
+        "style": {
+          "shape": "round-rectangle",
+          "width": 100,
+          "height": 40,
+          "font-size": "12px",
+          "text-valign": "center",
+          "label": "data(label)",
+          "color": "#000",
+          "background-color": "#ccc",
+          "border-width": 1,
+          "border-color": "#000",
+          "text-wrap": "wrap",
+          "text-max-width": "90px"
+        }
+      },
+      {
+        "selector": "edge",
+        "style": {
+          "width": 2,
+          "line-color": "#ccc",
+          "target-arrow-color": "#ccc",
+          "target-arrow-shape": "triangle",
+          "arrow-scale": 1.2,
+          "curve-style": "bezier"
+        }
+      },
+      {
+        "selector": ".hidden",
+        "style": {
+          "display": "none"
+        }
+      }
+    ],
+    "elements": {
+      "nodes": [
+        { "data": { "id": "Breast", "label": "Breast" } },
+        { "data": { "id": "GI", "label": "GI" } },
+        { "data": { "id": "GU", "label": "GU" } },
+        { "data": { "id": "GynOnc", "label": "Gyn/Onc" } },
+        { "data": { "id": "HN", "label": "H&N" } },
+        { "data": { "id": "LungThoracic", "label": "Lung/Thoracic" } },
+        { "data": { "id": "Melanoma", "label": "Melanoma / Cutaneous / Skin" } },
+        { "data": { "id": "RadOnc", "label": "Rad/Onc" } },
+        { "data": { "id": "TumorAgnostic", "label": "Tumor Agnostic" } },
+        { "data": { "id": "B", "label": "Node B" }, "classes": "hidden" },
+        { "data": { "id": "C", "label": "Node C" }, "classes": "hidden" },
+        { "data": { "id": "D", "label": "Node D" }, "classes": "hidden" },
+        { "data": { "id": "E", "label": "Node E" }, "classes": "hidden" }
+      ],
+      "edges": [
+        { "data": { "id": "Breast-B", "source": "Breast", "target": "B" }, "classes": "hidden" },
+        { "data": { "id": "B-C", "source": "B", "target": "C" }, "classes": "hidden" },
+        { "data": { "id": "B-D", "source": "B", "target": "D" }, "classes": "hidden" },
+        { "data": { "id": "B-E", "source": "B", "target": "E" }, "classes": "hidden" }
+      ]
+    },
+    "tooltips": {
+      "C": "Tooltip for Node C<br><a href='https://google.com' target='_blank'>Google</a>",
+      "D": "Tooltip for Node D<br><a href='https://bing.com' target='_blank'>Bing</a>",
+      "E": "Tooltip for Node E<br><a href='https://duckduckgo.com' target='_blank'>DuckDuckGo</a>"
+    }
+  }
+  
