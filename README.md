@@ -5,7 +5,7 @@
 **Published:** 01/03/2025
 
 # Purpose
-Displays all MPOP trials in a succint manner via a dynamic flowchart (graph)
+Displays all MPOP trials in a succinct manner via a dynamic flowchart (graph)
 
 ## Getting Started
 
