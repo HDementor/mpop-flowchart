@@ -1,0 +1,109 @@
+/* General body styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Header styling */
+#header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #0078d4;
+  color: white;
+}
+
+#header img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+#header h1 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+/* Container for the graph and controls */
+#container {
+  display: flex;
+  flex: 1;
+}
+
+#graph-panel {
+  flex: 9;
+  padding: 10px;
+  /* Subtract the header height + any extra margin/padding from 100vh */
+  height: calc(100vh - 80px);
+  box-sizing: border-box; /* Ensures padding doesn't expand the panel beyond 100vh minus offset */
+  overflow: hidden;        /* or `overflow: auto;` if you prefer scrollbars */
+}
+
+#cy {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ddd;
+}
+
+#controls-panel {
+  flex: 3;
+  background-color: #f1f1f1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#controls-panel label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+#controls-panel select,
+#controls-panel button {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#controls-panel button {
+  background-color: #0078d4;
+  color: white;
+  cursor: pointer;
+}
+
+#controls-panel button:hover {
+  background-color: #005a9e;
+}
+
+/* Log panel styling */
+#log-panel {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  height: 10%;
+  overflow-y: auto;
+  resize: vertical; /* Enables dragging to resize */
+  min-height: 50px; /* Prevent collapsing too much */
+  max-height: 50%; /* Limit expansion */
+}
+
+#log-panel h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+#logs {
+  font-size: 0.8rem;
+  color: #777;
+  overflow-y: auto;
+  max-height: 100%;
+}
