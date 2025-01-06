@@ -6,10 +6,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const clearLogsBtn = document.getElementById('clear-logs'); // New button
   const categorySelect = document.getElementById('oncology-category');
 
-  let cy;
-  let lastClickTime = 0;
-  const doubleClickDelay = 250; // Delay in milliseconds to detect a double-click
+  const BACKEND_URL = 'http://127.0.0.1:9999';
 
+  let cy;
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  
+  async function sleep_and_log() {
+    console.log("Start");
+    await sleep(2000); // Wait for 2 seconds
+    console.log("End"); 
+  }
   const logMessage = (message) => {
     const logEntry = document.createElement('div');
     logEntry.textContent = message;
@@ -24,187 +33,56 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Logs cleared.'); // Optional debugging log
   });
 
-  function isHidden(id) {
-    return cy.getElementById(id).hasClass('hidden');
-  }
+  // Function to process CSV-to-JSON conversion
+  const convertCsvToJson = () => {
+    logMessage('Converting CSV to JSON with updated unique IDs...');
 
-  function show(id) {
-    cy.getElementById(id).removeClass('hidden');
-    logMessage(`Showing node or edge: ${id}`);
-  }
-
-  function hide(id) {
-    cy.getElementById(id).addClass('hidden');
-    logMessage(`Hiding node or edge: ${id}`);
-  }
-
-  const toggleDownstream = (nodeId) => {
-    logMessage(`Toggling downstream nodes for: ${nodeId}`);
-
-    const hideAllDescendants = (id) => {
-      const connectedEdges = cy.edges(`[source = "${id}"]`);
-      connectedEdges.forEach(edge => {
-        const targetNode = edge.target();
-        edge.addClass('hidden');
-        logMessage(`Hiding edge: ${edge.id()}`);
-        targetNode.addClass('hidden');
-        logMessage(`Hiding node: ${targetNode.id()}`);
-        hideAllDescendants(targetNode.id());
+    fetch(`${BACKEND_URL}/csv-to-json`)
+      .then((response) => {
+        logMessage(`Response status: ${response.status}`);
+        logMessage('CSV-to-JSON conversion completed.');
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .catch((err) => {
+        logMessage(`Error converting CSV: ${err.message}`);
+        console.error('Error details:', err);
       });
-    };
-
-    const connectedEdges = cy.edges(`[source = "${nodeId}"]`);
-    if (isHidden(connectedEdges[0]?.id())) {
-      connectedEdges.forEach(edge => {
-        const targetNode = edge.target();
-        edge.removeClass('hidden');
-        logMessage(`Showing edge: ${edge.id()}`);
-        targetNode.removeClass('hidden');
-        logMessage(`Showing node: ${targetNode.id()}`);
-      });
-    } else {
-      hideAllDescendants(nodeId);
-    }
   };
 
-  const filterByCategory = (data, category) => {
-    logMessage(`Selected category before replace: ${category}`);
-
-    // Replace all underscores globally with slashes
-    let categoryName = category.replace(/_/g, '/');
-    logMessage(`Category after replace: ${categoryName}`);
-
-    if (category === 'Tumor_Agnostic') {
-      categoryName = 'Tumor Agnostic';
-    }
-
-    if (categoryName.includes('Melanoma')) {
-      logMessage(`Category includes Melanoma: ${categoryName}`);
-    }
-
-    if (category === 'All (active trials)') {
-      const trialCodeNodes = new Set();
-      const lineageNodes = new Set();
-
-      // Step 1: Collect trial_code nodes
-      logMessage("Step 1: Collecting trial_code nodes");
-      data.elements.nodes.forEach(node => {
-        if (node.data.type === 'trial_code') {
-          trialCodeNodes.add(node.data.id);
-          lineageNodes.add(node.data.id);
-          logMessage(`Trial Code Node Added: ${node.data.id}`);
-        }
-      });
-
-      // Step 2: Include all direct predecessors of trial_code nodes
-      logMessage("Step 2: Including direct predecessors");
-      data.elements.edges.forEach(edge => {
-        if (trialCodeNodes.has(edge.data.target)) {
-          lineageNodes.add(edge.data.source);
-          logMessage(`Predecessor Node Added: ${edge.data.source}`);
-        }
-      });
-
-      // Step 3: Include all ancestor nodes in the hierarchy
-      logMessage("Step 3: Including all ancestors in the hierarchy");
-      data.elements.edges.forEach(edge => {
-        if (lineageNodes.has(edge.data.target)) {
-          lineageNodes.add(edge.data.source);
-          logMessage(`Ancestor Node Added: ${edge.data.source}`);
-        }
-      });
-
-      // Step 4: Explicitly include oncology_category and study_type nodes
-      logMessage("Step 4: Including oncology_category and study_type nodes");
-      data.elements.nodes.forEach(node => {
-        if (
-          node.data.type === 'oncology_category' ||
-          node.data.type === 'study_type'
-        ) {
-          lineageNodes.add(node.data.id);
-          logMessage(`Node Explicitly Added: ${node.data.id} (${node.data.type})`);
-        }
-      });
-
-      // Step 5: Filter nodes
-      logMessage("Step 5: Filtering nodes");
-      data.elements.nodes.forEach(node => {
-        if (lineageNodes.has(node.data.id)) {
-          delete node.classes;
-        } else {
-          node.classes = 'hidden';
-        }
-      });
-
-      // Step 6: Filter edges
-      logMessage("Step 6: Filtering edges");
-      data.elements.edges.forEach(edge => {
-        if (lineageNodes.has(edge.data.source) && lineageNodes.has(edge.data.target)) {
-          delete edge.classes;
-        } else {
-          edge.classes = 'hidden';
-        }
-      });
-
-      return data;
-    }
-
-    if (category === 'All_fully_expanded') {
-      // Show everything for "All Fully Expanded"
-      data.elements.nodes.forEach(node => {
-        node.data.label = node.data.label.replace(/\//g, '/ ');
-        delete node.classes;
-      });
-      data.elements.edges.forEach(edge => {
-        delete edge.classes;
-      });
-      return data;
-    }
-
-    const filteredNodes = new Set();
-    const filteredEdges = [];
-
-    data.elements.edges.forEach(edge => {
-      if (edge.data.source.includes(categoryName)) {
-        filteredEdges.push(edge);
-        filteredNodes.add(edge.data.source);
-        filteredNodes.add(edge.data.target);
-      }
-    });
-
-    data.elements.nodes.forEach(node => {
-      if (filteredNodes.has(node.data.id)) {
-        node.data.label = node.data.label.replace(/\//g, '/ ');
-        delete node.classes;
-      } else {
-        node.classes = 'hidden';
-      }
-    });
-
-    data.elements.edges.forEach(edge => {
-      if (!filteredEdges.includes(edge)) {
-        edge.classes = 'hidden';
-      } else {
-        delete edge.classes;
-      }
-    });
-
-    return data;
-  };
-
-  const renderGraph = (data, category) => {
-    //logMessage('Local JSON Data: ' + JSON.stringify(data, null, 2));
+  const renderGraph = (data) => {
+    logMessage('API Response Data: ' + JSON.stringify(data, null, 2));
 
     if (!data || !data.elements || !data.elements.nodes || !data.elements.edges) {
       logMessage('Error: Invalid data received.');
       return;
     }
 
-    const filteredData = filterByCategory(data, category);
+    const elements = [
+      ...data.elements.nodes.map(node => ({
+        data: {
+          ...node.data,
+          label: node.data.label.replace(/\//g, '/ '), // Insert space after '/' for wrapping
+        },
+        classes: categorySelect.value === 'All' && node.data.type !== 'oncology_category' ? 'hidden' : ''
+      })),
+      ...data.elements.edges.map(edge => ({
+        data: edge.data,
+        classes: categorySelect.value === 'All' ? 'hidden' : ''
+      }))
+    ];
+
+    if (categorySelect.value === 'All_fully_expanded') {
+      elements.forEach(element => {
+        element.classes = '';
+      });
+    }
 
     cy = cytoscape({
       container: cyContainer,
-      elements: filteredData.elements,
+      elements: elements,
       style: [
         {
           selector: 'node',
@@ -216,12 +94,12 @@ document.addEventListener('DOMContentLoaded', () => {
             'text-valign': 'center',
             'font-size': '12px',
             'padding': '10px',
-            'width': 100,
-            'height': 40,
-            'text-wrap': 'wrap',
-            'text-max-width': '90px',
-            'color': '#000',
-            'border-width': 1
+            "width": 100,
+            "height": 40,
+            "text-wrap": "wrap",
+            "text-max-width": "90px",
+            "color": "#000",
+            "border-width": 1
           }
         },
         {
@@ -236,9 +114,9 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         },
         {
-          'selector': '.hidden',
-          'style': {
-            'display': 'none'
+          "selector": ".hidden",
+          "style": {
+            "display": "none"
           }
         }
       ],
@@ -264,7 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
       tooltip.style.backgroundColor = '#fff';
       tooltip.style.border = '1px solid #000';
       tooltip.style.zIndex = 1000;
-      tooltip.style.fontSize = '10px'; // Reduced font size by 2 points
       document.body.appendChild(tooltip);
     });
 
@@ -275,17 +152,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    cy.on('tap', 'node[type="trial_code"]', function (evt) {
-      const now = new Date().getTime();
-      const node = evt.target;
-
-      if (now - lastClickTime < doubleClickDelay) {
-        const hyperlink = node.data('hyperlink');
-        if (hyperlink) {
-          window.open(hyperlink, '_blank');
-        }
+    cy.on('cxttap', 'node[type="trial_code"]', function (e) {
+      const hyperlink = this.data('hyperlink');
+      if (hyperlink) {
+        window.open(hyperlink, '_blank');
       }
-      lastClickTime = now;
     });
 
     cy.on('tap', 'node', (evt) => {
@@ -296,59 +167,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (clickedNode) {
         logMessage(`Handling click for node: ${nodeId}`);
-
-        const shouldHide = !isHidden(cy.edges(`[source = "${nodeId}"]`)[0]?.id());
-
-        const hideAllDescendants = (id) => {
-          const connectedEdges = cy.edges(`[source = "${id}"]`);
-          connectedEdges.forEach(edge => {
-            const targetNode = edge.target();
-            edge.addClass('hidden');
-            logMessage(`Hiding edge: ${edge.id()}`);
-            targetNode.addClass('hidden');
-            logMessage(`Hiding node: ${targetNode.id()}`);
-            hideAllDescendants(targetNode.id());
-          });
-        };
-
-        if (shouldHide) {
-          hideAllDescendants(nodeId);
-        } else {
-          const connectedEdges = cy.edges(`[source = "${nodeId}"]`);
-          connectedEdges.forEach(edge => {
-            const targetNode = edge.target();
-            edge.removeClass('hidden');
-            logMessage(`Showing edge: ${edge.id()}`);
-            targetNode.removeClass('hidden');
-            logMessage(`Showing node: ${targetNode.id()}`);
-          });
-        }
+        toggleDownstream(nodeId);
       }
     });
 
-    logMessage('Updated Cytoscape Data: ' + JSON.stringify(filteredData.elements, null, 2));
+    logMessage('Updated Cytoscape Data: ' + JSON.stringify(elements, null, 2));
   };
 
   renderGraphBtn.addEventListener('click', () => {
     const category = categorySelect.value;
-    logMessage(`Rendering graph for category: ${category}`);
-
-    fetch('../data/mpop-tidytable.json')
+    logMessage(`Fetching data for category: ${category}`);
+    fetch(`${BACKEND_URL}/oncology_category/${category}`)
       .then((response) => {
+        logMessage(`Response status: ${response.status}`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         return response.json();
       })
       .then((data) => {
-        renderGraph(data, category);
+        if (data && typeof data === 'object') {
+          sleep_and_log();
+          renderGraph(data);
+          logMessage(`Rendered graph for category: ${category}`);
+        } else {
+          logMessage('Error: Unexpected response format.');
+        }
       })
       .catch((err) => {
         logMessage(`Error rendering graph: ${err.message}`);
+        console.error('Error details:', err);
       });
   });
 
-  convertCsvBtn.addEventListener('click', () => {
-    logMessage('CSV-to-JSON functionality is unavailable in local-only mode.');
-  });
+  convertCsvBtn.addEventListener('click', convertCsvToJson);
 });

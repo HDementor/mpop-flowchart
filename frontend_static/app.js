@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const categorySelect = document.getElementById('oncology-category');
 
   let cy;
+  let lastClickTime = 0;
+  const doubleClickDelay = 250; // Delay in milliseconds to detect a double-click
 
   const logMessage = (message) => {
     const logEntry = document.createElement('div');
@@ -273,11 +275,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    cy.on('cxttap', 'node[type="trial_code"]', function () {
-      const hyperlink = this.data('hyperlink');
-      if (hyperlink) {
-        window.open(hyperlink, '_blank');
+    cy.on('tap', 'node[type="trial_code"]', function (evt) {
+      const now = new Date().getTime();
+      const node = evt.target;
+
+      if (now - lastClickTime < doubleClickDelay) {
+        const hyperlink = node.data('hyperlink');
+        if (hyperlink) {
+          window.open(hyperlink, '_blank');
+        }
       }
+      lastClickTime = now;
     });
 
     cy.on('tap', 'node', (evt) => {
