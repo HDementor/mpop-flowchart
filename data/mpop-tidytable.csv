@@ -1,10 +1,10 @@
 oncology_category,study_type,trial_phase,therapy_line,trial_code,trial_description,hyperlink
 HN,Interventional,Neoadjuvant Trials,,,,
 HN,Interventional,Adjuvant Trials,,,,
-HN,Interventional,Metastatic Trials,Line1,GS-1811,blah blah,https://google.com
-HN,Interventional,Metastatic Trials,Line2,SGNDV-005 (Cohort 1),blah blah,https://google.com
-HN,Interventional,Metastatic Trials,Line2,ABBV-CLS-484,blah blah,https://google.com
-HN,Interventional,Metastatic Trials,Line3+,ABBV-CLS-484,blah blah,https://google.com
+HN,Interventional,Metastatic Trials,Line1,GS-1811,A Phase 1 Study to Evaluate the Safety Tolerability and Preliminary Efficacy of GS-1811 an Afucosylated Anti-CCR8 Monoclonal Antibody as Monotherapy and in Combination With an Anti–PD-1 Monoclonal Antibody in Adults With Advanced Solid Tumors.,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/GS-1811%20(H&N).aspx
+HN,Interventional,Metastatic Trials,Line2,SGNDV-005 (Cohort 1),A Phase 2 Basket Study of Disitamab Vedotin in Adult Subjects with Previously Treated Locally-Advanced Unresectable or Metastatic Solid Tumors That Express HER2.,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/SGNDV-005%20(Cohort%201).aspx
+HN,Interventional,Metastatic Trials,Line2,ABBV-CLS-484,A Phase 1 Study with ABBV-CLS-484 Alone and in Combination in Subjects with Locally Advanced or Metastatic Tumors.,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/ABBV-CLS-484-Alone-or-in-Combo-with-Pembro-or-Cabo.aspx
+HN,Interventional,Metastatic Trials,Line3+,ABBV-CLS-484,A Phase 1 Study with ABBV-CLS-484 Alone and in Combination in Subjects with Locally Advanced or Metastatic Tumors.,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/ABBV-CLS-484-Alone-or-in-Combo-with-Pembro-or-Cabo.aspx
 HN,Non-Interventional,Postop/Adjuvant,,,,
 HN,Non-Interventional,Metastatic Trials,,,,
 Breast,Interventional,Neoadjuvant Trials,,,,
@@ -12,35 +12,35 @@ Breast,Interventional,Adjuvant Trials,,,,
 Breast,Interventional,Metastatic Trials,Line1,,,
 Breast,Interventional,Metastatic Trials,Line2,,,
 Breast,Interventional,Metastatic Trials,Line3+,,,
-Breast,Non-Interventional,Postop/Adjuvant,No Line,Oracle (Cohort 3),Following ctDNA Across Multiple Solid Tumors Using Guardant MRD Assay (Cohort 3),https://365utsouthwestern.sharepoint.com/:u:/r/sites/MPOPClinicalTrials/SitePages/Following-ctDNA-Across-Multiple-Solid-Tumors-Using-Guardant-MRD-Assay-(Cohort-3).aspx
-Breast,Non-Interventional,Metastatic Trials,No Line,SIBYL,blah blah,https://365utsouthwestern.sharepoint.com/:u:/r/sites/MPOPClinicalTrials/SitePages/SIBYL%20(Breast).aspx
+Breast,Non-Interventional,Postop/Adjuvant,No Line,Oracle (Cohort 3),ORACLE: Observation of ResiduAl Cancer with Liquid Biopsy Evaluation.,https://365utsouthwestern.sharepoint.com/:u:/r/sites/MPOPClinicalTrials/SitePages/Following-ctDNA-Across-Multiple-Solid-Tumors-Using-Guardant-MRD-Assay-(Cohort-3).aspx
+Breast,Non-Interventional,Metastatic Trials,No Line,SIBYL,SIBYL: obServation of therapy response with lIquid BiopsY evaLuation.,https://365utsouthwestern.sharepoint.com/:u:/r/sites/MPOPClinicalTrials/SitePages/SIBYL%20(Breast).aspx
 GI,Interventional,Neoadjuvant Trials,,,,
 GI,Interventional,Adjuvant Trials,,,,
-GI,Interventional,Metastatic Trials,Line1,XL092-002 (Cohort 7),blah blah,https://google.com
+GI,Interventional,Metastatic Trials,Line1,XL092-002 (Cohort 7),A Dose-Escalation and Expansion Study of the Safety and Efficacy of XL092 in Combination with Immuno-Oncology Agents in Subjects with Unresectable Advanced or Metastatic Solid Tumors.,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/XL092-combo-with-IO-Agents-in-first-line-nccRCC-and-HCC-(Cohort-7).aspx
 GI,Interventional,Metastatic Trials,Line2,,,
 GI,Interventional,Metastatic Trials,Line3+,,,
-GI,Non-Interventional,Postop/Adjuvant,No Line,Oracle (Cohorts 5/6/7/12),blah blah,https://google.com
-GI,Non-Interventional,Metastatic Trials,No Line,SIBYL,blah blah,https://google.com
+GI,Non-Interventional,Postop/Adjuvant,No Line,Oracle (Cohorts 5/6/7/12),ORACLE: Observation of ResiduAl Cancer with Liquid Biopsy Evaluation.,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/Following-ctDNA-Across-Multiple-Solid-Tumors-Using-Guardant-MRD-Assay-(Cohort-5).aspx
+GI,Non-Interventional,Metastatic Trials,No Line,SIBYL,SIBYL: obServation of therapy response with lIquid BiopsY evaLuation.,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/SIBYL%20(GI).aspx
 GU,Interventional,Neoadjuvant Trials,,,,
 GU,Interventional,Adjuvant Trials,,,,
-GU,Interventional,Metastatic Trials,Line1,XL092-002 (Cohort 6),blah blah,https://google.com
+GU,Interventional,Metastatic Trials,Line1,XL092-002 (Cohort 6),A Dose-Escalation and Expansion Study of the Safety and Efficacy of XL092 in Combination with Immuno-Oncology Agents in Subjects with Unresectable Advanced or Metastatic Solid Tumors.,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/XL092-Combo-with-IO-Agents-in-First-Line-nccRCC-and-HCC.aspx
 GU,Interventional,Metastatic Trials,Line2,,,
 GU,Interventional,Metastatic Trials,Line3+,,,
-GU,Non-Interventional,Postop/Adjuvant,No Line,Oracle (Cohorts 1/11),blah blah,https://google.com
+GU,Non-Interventional,Postop/Adjuvant,No Line,Oracle (Cohorts 1/11),ORACLE: Observation of ResiduAl Cancer with Liquid Biopsy Evaluation.,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/Following-ctDNA-Across-Multiple-Solid-Tumors-Using-Guardant-MRD-Assay.aspx
 GU,Non-Interventional,Metastatic Trials,,,,
 Gyn/Onc,Interventional,Neoadjuvant Trials,,,,
 Gyn/Onc,Interventional,Adjuvant Trials,,,,
 Gyn/Onc,Interventional,Metastatic Trials,Line1,,,
 Gyn/Onc,Interventional,Metastatic Trials,Line2,,,
-Gyn/Onc,Interventional,Metastatic Trials,Line3+,GS-1811,blah blah,https://google.com
-Gyn/Onc,Non-Interventional,Postop/Adjuvant,No Line,Oracle (Cohorts 9/10),blah blah,https://google.com
+Gyn/Onc,Interventional,Metastatic Trials,Line3+,GS-1811,A Phase 1 Study to Evaluate the Safety Tolerability and Preliminary Efficacy of GS-1811 an Afucosylated Anti-CCR8 Monoclonal Antibody as Monotherapy and in Combination With an Anti–PD-1 Monoclonal Antibody in Adults With Advanced Solid Tumors.,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/GS-1811%20(Gyn-Onc).aspx
+Gyn/Onc,Non-Interventional,Postop/Adjuvant,No Line,Oracle (Cohorts 9/10),ORACLE: Observation of ResiduAl Cancer with Liquid Biopsy Evaluation.,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/Following-ctDNA-Across-Multiple-Solid-Tumors-Using-Guardant-MRD-Assay-(Cohort-9-10).aspx
 Gyn/Onc,Non-Interventional,Metastatic Trials,,,,
 Lung/Thoracic,Interventional,Neoadjuvant Trials,,,,
 Lung/Thoracic,Interventional,Adjuvant Trials,,,,
 Lung/Thoracic,Interventional,Metastatic Trials,Line1,,,
 Lung/Thoracic,Interventional,Metastatic Trials,Line2,,,
 Lung/Thoracic,Interventional,Metastatic Trials,Line3+,,,
-Lung/Thoracic,Non-Interventional,Postop/Adjuvant,No Line,Oracle (Cohort 2),blah blah,https://google.com
+Lung/Thoracic,Non-Interventional,Postop/Adjuvant,No Line,Oracle (Cohort 2),ORACLE: Observation of ResiduAl Cancer with Liquid Biopsy Evaluation.,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/Following-ctDNA-Across-Multiple-Solid-Tumors-Using-Guardant-MRD-Assay-(Cohort-2).aspx
 Lung/Thoracic,Non-Interventional,Metastatic Trials,,,,
 Melanoma/Cutaneous/Sarcoma,Interventional,Neoadjuvant Trials,,,,
 Melanoma/Cutaneous/Sarcoma,Interventional,Adjuvant Trials,,,,
@@ -57,9 +57,9 @@ Rad/Onc,Interventional,Metastatic Trials,Line3+,,,
 Rad/Onc,Non-Interventional,Postop/Adjuvant,,,,
 Rad/Onc,Non-Interventional,Metastatic Trials,,,,
 Tumor Agnostic,Interventional,Non-Metastatic,,,,
-Tumor Agnostic,Interventional,Metastatic,No Line,NCI AIM NIVO,blah blah,https://google.com
-Tumor Agnostic,Interventional,Metastatic,No Line,LOXO-Libretto-001,blah blah,https://google.com
-Tumor Agnostic,Interventional,Other,No Line,SWOG 2012,blah blah,https://google.com
-Tumor Agnostic,Interventional,Other,No Line,Atrium,blah blah,https://google.com
+Tumor Agnostic,Interventional,Metastatic,No Line,NCI AIM NIVO,A Phase 1b Study of Nivolumab in Patients with Autoimmune Disorders and Advanced Malignancies (AIM-NIVO).,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/Nivo-for-Autoimmune-Disorders-and-Advanced-Malignancies.aspx
+Tumor Agnostic,Interventional,Metastatic,No Line,LOXO-Libretto-001,A Phase 1/2 Study of Oral Selpercatinib (LOXO-292) in Patients with Advanced Solid Tumors Including RET Fusion-Positive Solid Tumors Medullary Thyroid Cancer and Other Tumors with RET Activation (LIBRETTO-001).,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/Selpercatinib-in-Ret-fusion-Positive-Solid-Tumors.aspx
+Tumor Agnostic,Interventional,Other,No Line,SWOG 2012,Randomized Phase II/III Trial Of First Line Platinum/Etoposide With Or Without Atezolizumab (Nsc#783608) In Patients With Advanced Or Metastatic Poorly Differentiated Extrapulmonary Neuroendocrine Carcinomas (NEC).,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/First-Line-Platinum-Etoposide-with-or-without-Atezolizumab-for-Neuroendocrine-Carcinoma.aspx
+Tumor Agnostic,Interventional,Other,No Line,Atrium,A Phase 3 Investigator-Initiated Randomized Double- Blind Placebo-Controlled Study to Evaluate the Efficacy and Safety of Abatacept Compared to Placebo in Hospitalized Participants with Immune Checkpoint Inhibitor Associated Myocarditis.,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/AbatacepT-foR-ImmUne-checkpoint-inhibitor-associated-Myocarditis-(ATRIUM).aspx
 Tumor Agnostic,Non-Interventional,Postop/Adjuvant,,,,
 Tumor Agnostic,Non-Interventional,Metastatic Trials,,,,
