@@ -28,7 +28,8 @@ COLOR_MAP = {
     'lightbrown': '#D2B48C',
     'tanbrown': '#D2B48C',
     'lightblue': '#ADD8E6',
-    'purple': '#90EE90'
+    'purple': '#90EE90',
+    'yellow': '#FFFF00'
 }
 
 # Helper function to log responses
@@ -135,6 +136,105 @@ def convert_csv_to_json():
         log_response('csv-to-json', {"error": str(e)})
         debug_log(f"Exception in convert_csv_to_json: {e}")
         return jsonify(message=str(e)), 500
+
+@app.route('/csv-to-json-stubbed', methods=['GET'])
+def convert_csv_to_json_stubbed():
+    try:
+        data = csv_to_cytoscape_json_stubbed()
+
+        if "error" in data:
+            debug_log("Error returned from csv_to_cytoscape_json_stubbed.")
+            return jsonify(message=data["error"]), 500
+
+        debug_log(f"Writing JSON output to file: {JSON_FILE}")
+        with open(JSON_FILE, 'w') as f:
+            json.dump(data, f)
+
+        log_response('csv-to-json-stubbed', data)
+        return jsonify(message="CSV converted to Cytoscape-compatible JSON with stubbing."), 200
+    except Exception as e:
+        log_response('csv-to-json-stubbed', {"error": str(e)})
+        debug_log(f"Exception in convert_csv_to_json_stubbed: {e}")
+        return jsonify(message=str(e)), 500
+
+# Stubbed JSON helper function
+def csv_to_cytoscape_json_stubbed():
+    try:
+        debug_log(f"Attempting to read CSV file from: {CSV_FILE}")
+
+        if not os.path.exists(CSV_FILE):
+            debug_log("CSV file not found.")
+            return {"error": "CSV file not found."}
+
+        df = pd.read_csv(CSV_FILE)
+        debug_log(f"CSV file read successfully. Columns: {list(df.columns)}")
+
+        G = nx.DiGraph()
+
+        # Build the graph from the CSV
+        for _, row in df.iterrows():
+            if pd.notna(row['oncology_category']):
+                oncology_category_id = row['oncology_category']
+                G.add_node(oncology_category_id, id=oncology_category_id, label=row['oncology_category'], type='oncology_category', color=COLOR_MAP['darkgrey'], outline='black', classes='')
+
+            if pd.notna(row['study_type']):
+                study_type_id = f"{row['study_type']}_{row['oncology_category']}"
+                color = COLOR_MAP['lightbrown'] if row['study_type'] == 'Interventional' else COLOR_MAP['tanbrown']
+                G.add_node(study_type_id, id=study_type_id, label=row['study_type'], type='study_type', color=color, outline='black', classes='hidden')
+
+            if pd.notna(row['trial_phase']):
+                trial_phase_id = f"{row['trial_phase']}_{row['study_type']}_{row['oncology_category']}"
+                G.add_node(trial_phase_id, id=trial_phase_id, label=row['trial_phase'], type='trial_phase', color=COLOR_MAP['lightblue'], outline='black', classes='hidden')
+
+            if pd.notna(row['therapy_line']):
+                therapy_line_id = f"{row['therapy_line']}_{row['trial_phase']}_{row['study_type']}_{row['oncology_category']}"
+                G.add_node(therapy_line_id, id=therapy_line_id, label=row['therapy_line'], type='therapy_line', color=COLOR_MAP['purple'], outline='black', classes='hidden')
+
+            if pd.notna(row['trial_code']):
+                trial_code_id = row['trial_code']  # Trial codes are not made unique
+                # Use the hyperlink and trial description from the CSV
+                hyperlink = row['hyperlink'] if pd.notna(row['hyperlink']) else 'https://default-link.com'
+                trial_description = row['trial_description'] if pd.notna(row['trial_description']) else 'No description available'
+                G.add_node(trial_code_id, id=trial_code_id, label=row['trial_code'], type='trial_code', color=COLOR_MAP['lightred'], outline='black', description=trial_description, hyperlink=hyperlink, classes='hidden')
+
+            # Add edges
+            if pd.notna(row['oncology_category']) and pd.notna(row['study_type']):
+                G.add_edge(oncology_category_id, study_type_id, arrow=True, classes='hidden')
+            if pd.notna(row['study_type']) and pd.notna(row['trial_phase']):
+                G.add_edge(study_type_id, trial_phase_id, arrow=True, classes='hidden')
+            if pd.notna(row['trial_phase']) and pd.notna(row['therapy_line']):
+                G.add_edge(trial_phase_id, therapy_line_id, arrow=True, classes='hidden')
+            if pd.notna(row['therapy_line']) and pd.notna(row['trial_code']):
+                G.add_edge(therapy_line_id, trial_code_id, arrow=True, classes='hidden')
+
+        # Stub out branches without trial_codes
+        for node in list(G.nodes):
+            if G.out_degree(node) == 0 and G.nodes[node]['type'] != 'trial_code':
+                # Add a "No Trials" node and edge
+                no_trials_id = f"{node}_no_trials"
+                G.add_node(no_trials_id, id=no_trials_id, label="No Trials", type='no_trials', color=COLOR_MAP['yellow'], outline='black', classes='hidden')
+                G.add_edge(node, no_trials_id, arrow=True, classes='hidden')
+
+        # Convert NetworkX graph to Cytoscape-compatible format
+        nodes = []
+        edges = []
+
+        for node, attr in G.nodes(data=True):
+            classes = attr.pop('classes', '')  # Remove 'classes' from data
+            nodes.append({"data": attr, "classes": classes})
+
+        for source, target, attr in G.edges(data=True):
+            classes = attr.pop('classes', '')  # Remove 'classes' from data
+            edges.append({"data": {"source": source, "target": target, **attr}, "classes": classes})
+
+        json_output = {"elements": {"nodes": nodes, "edges": edges}}
+        debug_log(f"Generated Stubbed JSON: {json.dumps(json_output, indent=2)}")
+
+        return json_output
+
+    except Exception as e:
+        debug_log(f"Error in csv_to_cytoscape_json_stubbed: {e}")
+        return {"error": str(e)}
 
 @app.route('/oncology_category/<category_name>', methods=['GET'])
 def get_oncology_category(category_name):

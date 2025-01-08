@@ -3,37 +3,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const logsContainer = document.getElementById('logs');
   const renderGraphBtn = document.getElementById('render-graph');
   const convertCsvBtn = document.getElementById('convert-csv');
-  const clearLogsBtn = document.getElementById('clear-logs'); // New button
+  const convertCsvStubbedBtn = document.createElement('button'); // New button for stubbed JSON
   const categorySelect = document.getElementById('oncology-category');
 
   const BACKEND_URL = 'http://127.0.0.1:9999';
 
   let cy;
 
-  function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-  
-  async function sleep_and_log() {
-    console.log("Start");
-    await sleep(2000); // Wait for 2 seconds
-    console.log("End"); 
-  }
   const logMessage = (message) => {
     const logEntry = document.createElement('div');
     logEntry.textContent = message;
     logsContainer.appendChild(logEntry);
     console.log(message);
-    logsContainer.scrollTop = logsContainer.scrollHeight; // Auto-scroll to the latest log
   };
 
-  // Clear Logs Button
-  clearLogsBtn.addEventListener('click', () => {
-    logsContainer.innerHTML = '';
-    console.log('Logs cleared.'); // Optional debugging log
-  });
-
-  // Function to process CSV-to-JSON conversion
+  // Function to process CSV-to-JSON conversion with unique IDs
   const convertCsvToJson = () => {
     logMessage('Converting CSV to JSON with updated unique IDs...');
 
@@ -48,6 +32,25 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .catch((err) => {
         logMessage(`Error converting CSV: ${err.message}`);
+        console.error('Error details:', err);
+      });
+  };
+
+  // Function to process CSV-to-JSON (Stubbed) conversion
+  const convertCsvToJsonStubbed = () => {
+    logMessage('Converting CSV to JSON (Stubbed) with updated unique IDs...');
+
+    fetch(`${BACKEND_URL}/csv-to-json-stubbed`)
+      .then((response) => {
+        logMessage(`Response status: ${response.status}`);
+        logMessage('CSV-to-JSON (Stubbed) conversion completed.');
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .catch((err) => {
+        logMessage(`Error converting CSV (Stubbed): ${err.message}`);
         console.error('Error details:', err);
       });
   };
@@ -187,7 +190,6 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .then((data) => {
         if (data && typeof data === 'object') {
-          sleep_and_log();
           renderGraph(data);
           logMessage(`Rendered graph for category: ${category}`);
         } else {
@@ -201,4 +203,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   convertCsvBtn.addEventListener('click', convertCsvToJson);
+
+  // Add and attach the new button for stubbed conversion
+  convertCsvStubbedBtn.textContent = 'Convert CSV to JSON (Stubbed)';
+  convertCsvStubbedBtn.id = 'convert-csv-stubbed';
+  document.getElementById('controls-panel').appendChild(convertCsvStubbedBtn);
+  convertCsvStubbedBtn.addEventListener('click', convertCsvToJsonStubbed);
 });
