@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const clearLogsBtn = document.getElementById('clear-logs'); // New button
   const categorySelect = document.getElementById('oncology-category');
 
+  const exportPdfBtn = document.createElement('button'); // New button for PDF export
+  exportPdfBtn.textContent = 'Export Graph to PDF';
+  exportPdfBtn.id = 'export-pdf';
+  document.getElementById('controls-panel').appendChild(exportPdfBtn); // Add button to controls
+
   let cy;
   let lastClickTime = 0;
   const doubleClickDelay = 250; // Delay in milliseconds to detect a double-click
@@ -22,6 +27,44 @@ document.addEventListener('DOMContentLoaded', () => {
   clearLogsBtn.addEventListener('click', () => {
     logsContainer.innerHTML = '';
     console.log('Logs cleared.'); // Optional debugging log
+  });
+
+  // Export Graph to PDF
+  exportPdfBtn.addEventListener('click', async () => {
+    if (!cy) {
+      logMessage('Error: No graph data to export.');
+      return;
+    }
+
+    try {
+      logMessage('Starting PDF export...');
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF('landscape', 'mm', 'a4');
+
+      // Get the bounding box of the Cytoscape graph
+      const svgContent = cy.svg({ scale: 2, full: true });
+
+      // Log the SVG content for troubleshooting
+      logMessage('SVG content generated.');
+      console.log('SVG Content:', svgContent);
+
+      const svgElement = document.createElement('div');
+      svgElement.innerHTML = svgContent;
+
+      // Use the svg2pdf library to add SVG to the PDF
+      await pdf.svg(svgElement.firstElementChild, {
+        x: 10,
+        y: 10,
+        width: pdf.internal.pageSize.getWidth() - 20,
+        height: pdf.internal.pageSize.getHeight() - 20,
+      });
+
+      pdf.save('graph.pdf');
+      logMessage('Graph exported to PDF successfully.');
+    } catch (error) {
+      logMessage(`Error exporting graph to PDF: ${error.message}`);
+      console.error('PDF Export Error:', error);
+    }
   });
 
   function isHidden(id) {

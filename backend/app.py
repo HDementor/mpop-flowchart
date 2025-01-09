@@ -19,7 +19,7 @@ os.makedirs(LOGS_DIR, exist_ok=True)
 
 # Configuration flags
 logging_enabled = False
-debug_enabled = False
+debug_enabled = True
 
 # Valid CSS colors
 COLOR_MAP = {
@@ -45,6 +45,34 @@ def log_response(api_call, response_data):
 def debug_log(message):
     if debug_enabled:
         print(f"DEBUG: {message}")
+
+# Helper function to check if a node has trial_code descendants
+# def does_node_have_trial_code_descendants(G, node):
+#     for descendant in nx.descendants(G, node):
+#         debug_log(f"Checking descendant node {descendant}")
+#         if G.nodes[descendant]['type'] == 'trial_code':
+#             debug_log(f"Node {node} has trial_code descendants")
+#             return True
+#     return False
+def does_node_have_trial_code_descendants(G, node):
+    debug_log(f"Checking if node {node} has trial_code descendants")
+    if node not in G.nodes:
+        debug_log(f"Node {node} does not exist in the graph.")
+        return False
+
+    try:
+        for descendant in nx.descendants(G, node):
+            debug_log(f"Checking descendant node {descendant}")
+            if 'type' in G.nodes[descendant] and G.nodes[descendant]['type'] == 'trial_code':
+                debug_log(f"Node {node} has trial_code descendants")
+                return True
+    except Exception as e:
+        debug_log(f"Error while checking descendants for node {node}: {e}")
+        return False
+
+    debug_log(f"Node {node} has no trial_code descendants")
+    return False
+
 
 # Helper function to convert CSV to Cytoscape-compatible JSON format
 def csv_to_cytoscape_json():
@@ -184,7 +212,9 @@ def csv_to_cytoscape_json_stubbed():
 
             if pd.notna(row['trial_phase']):
                 trial_phase_id = f"{row['trial_phase']}_{row['study_type']}_{row['oncology_category']}"
+                #debug_log(f"Creating trial_phase node with columns: {row['trial_phase']}_{row['study_type']}_{row['oncology_category']}")
                 G.add_node(trial_phase_id, id=trial_phase_id, label=row['trial_phase'], type='trial_phase', color=COLOR_MAP['lightblue'], outline='black', classes='hidden')
+                #debug_log(f"Successfully Created trial_phase node with columns: {row['trial_phase']}_{row['study_type']}_{row['oncology_category']}")
 
             if pd.notna(row['therapy_line']):
                 therapy_line_id = f"{row['therapy_line']}_{row['trial_phase']}_{row['study_type']}_{row['oncology_category']}"
@@ -201,18 +231,61 @@ def csv_to_cytoscape_json_stubbed():
             if pd.notna(row['oncology_category']) and pd.notna(row['study_type']):
                 G.add_edge(oncology_category_id, study_type_id, arrow=True, classes='hidden')
             if pd.notna(row['study_type']) and pd.notna(row['trial_phase']):
+                #debug_log(f"Creating trial_phase edge with columns: {trial_phase_id}")
                 G.add_edge(study_type_id, trial_phase_id, arrow=True, classes='hidden')
+                #debug_log(f"Successfullly Created trial_phase edge with columns: {trial_phase_id}")
             if pd.notna(row['trial_phase']) and pd.notna(row['therapy_line']):
+                #debug_log(f"Creating trial_phase edge with columns: {trial_phase_id}")
                 G.add_edge(trial_phase_id, therapy_line_id, arrow=True, classes='hidden')
+                #debug_log(f"Successfullly Created trial_phase edge with columns: {trial_phase_id}")
             if pd.notna(row['therapy_line']) and pd.notna(row['trial_code']):
                 G.add_edge(therapy_line_id, trial_code_id, arrow=True, classes='hidden')
 
-        # Stub out branches without trial_codes
+        # # Stub out branches without trial_codes
+        # for node in list(G.nodes):
+        #     debug_log(f"Checking node id {node}")
+        #     if G.nodes[node]['type'] == 'trial_code':
+        #         debug_log(f"Skipping trial_code node id {node}")
+        #         continue
+        #     debug_log(f"About to check if node id {node} has trial_code descendants")
+        #     if not does_node_have_trial_code_descendants(G, node):
+        #         debug_log(f"No trial codes found for node id {node}")
+        #         no_trials_id = f"{node}_no_trials"
+        #         G.add_node(no_trials_id, id=no_trials_id, label="No Trials", type='no_trials', color=COLOR_MAP['yellow'], outline='black', classes='hidden')
+
+        #         # Remove all outbound edges from this node
+        #         for _, target in list(G.out_edges(node)):
+        #             debug_log(f"Removing edge from {node} to {target}")
+        #             G.remove_node(target)
+        #             debug_log(f"Removed edge from {node} to {target}")
+        #         G.add_edge(node, no_trials_id, arrow=True, classes='hidden')
+
+        removed_nodes = set()  # Track nodes that have been removed
+
+        def remove_all_descendants(G, node):
+            """Recursively remove all descendants of a given node."""
+            for descendant in list(nx.descendants(G, node)):
+                if descendant not in removed_nodes:
+                    debug_log(f"Removing descendant node {descendant}")
+                    G.remove_node(descendant)
+                    removed_nodes.add(descendant)
+
         for node in list(G.nodes):
-            if G.out_degree(node) == 0 and G.nodes[node]['type'] != 'trial_code':
-                # Add a "No Trials" node and edge
+            if node in removed_nodes:
+                debug_log(f"Skipping node {node} because it was removed earlier.")
+                continue
+            if G.nodes[node]['type'] == 'trial_code':
+                continue
+            if not does_node_have_trial_code_descendants(G, node):
                 no_trials_id = f"{node}_no_trials"
                 G.add_node(no_trials_id, id=no_trials_id, label="No Trials", type='no_trials', color=COLOR_MAP['yellow'], outline='black', classes='hidden')
+
+                # Remove all outbound edges from this node and recursively remove descendants
+                for _, target in list(G.out_edges(node)):
+                    debug_log(f"Removing edge from {node} to {target}")
+                    remove_all_descendants(G, target)  # Remove all downstream nodes
+                    G.remove_node(target)  # Remove the immediate target node
+                    removed_nodes.add(target)
                 G.add_edge(node, no_trials_id, arrow=True, classes='hidden')
 
         # Convert NetworkX graph to Cytoscape-compatible format
@@ -233,7 +306,8 @@ def csv_to_cytoscape_json_stubbed():
         return json_output
 
     except Exception as e:
-        debug_log(f"Error in csv_to_cytoscape_json_stubbed: {e}")
+        #debug_log(f"Error in csv_to_cytoscape_json_stubbed: {e}")
+        debug_log(f"Error processing node {node}: {str(e)}")
         return {"error": str(e)}
 
 @app.route('/oncology_category/<category_name>', methods=['GET'])
