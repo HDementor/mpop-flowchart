@@ -195,9 +195,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (category === 'All_fully_expanded') {
       // Show everything for "All Fully Expanded"
       data.elements.nodes.forEach(node => {
-        node.data.label = node.data.label.replace(/\//g, '/ ');
+        if (node.data.label.includes("Melanoma/Cutaneous/Sarcoma")) {
+            node.data.label = node.data.label.replace(/\//g, '/ ');
+        }
         delete node.classes;
-      });
+    });    
       data.elements.edges.forEach(edge => {
         delete edge.classes;
       });
@@ -217,9 +219,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     data.elements.nodes.forEach(node => {
       if (filteredNodes.has(node.data.id)) {
-        node.data.label = node.data.label.replace(/\//g, '/ ');
+        if (node.data.label.includes("Melanoma/Cutaneous/Sarcoma")) {
+            node.data.label = node.data.label.replace(/\//g, '/ ');
+        }
         delete node.classes;
-      } else {
+    }
+     else {
         node.classes = 'hidden';
       }
     });
