@@ -1,12 +1,12 @@
 oncology_category,study_type,trial_phase,therapy_line,trial_code,trial_description,hyperlink
-HN,Interventional,Neoadjuvant Trials,,,,
-HN,Interventional,Adjuvant Trials,,,,
-HN,Interventional,Metastatic Trials,Line1,GS-1811,A Phase 1 Study to Evaluate the Safety Tolerability and Preliminary Efficacy of GS-1811 an Afucosylated Anti-CCR8 Monoclonal Antibody as Monotherapy and in Combination With an Anti–PD-1 Monoclonal Antibody in Adults With Advanced Solid Tumors.,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/GS-1811%20(H&N).aspx
-HN,Interventional,Metastatic Trials,Line2,SGNDV-005 (Cohort 1),A Phase 2 Basket Study of Disitamab Vedotin in Adult Subjects with Previously Treated Locally-Advanced Unresectable or Metastatic Solid Tumors That Express HER2.,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/SGNDV-005%20(Cohort%201).aspx
-HN,Interventional,Metastatic Trials,Line2,ABBV-CLS-484,A Phase 1 Study with ABBV-CLS-484 Alone and in Combination in Subjects with Locally Advanced or Metastatic Tumors.,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/ABBV-CLS-484-Alone-or-in-Combo-with-Pembro-or-Cabo.aspx
-HN,Interventional,Metastatic Trials,Line3+,ABBV-CLS-484,A Phase 1 Study with ABBV-CLS-484 Alone and in Combination in Subjects with Locally Advanced or Metastatic Tumors.,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/ABBV-CLS-484-Alone-or-in-Combo-with-Pembro-or-Cabo.aspx
-HN,Non-Interventional,Postop/Adjuvant,,,,
-HN,Non-Interventional,Metastatic Trials,,,,
+Head/Neck,Interventional,Neoadjuvant Trials,,,,
+Head/Neck,Interventional,Adjuvant Trials,,,,
+Head/Neck,Interventional,Metastatic Trials,Line1,GS-1811,A Phase 1 Study to Evaluate the Safety Tolerability and Preliminary Efficacy of GS-1811 an Afucosylated Anti-CCR8 Monoclonal Antibody as Monotherapy and in Combination With an Anti–PD-1 Monoclonal Antibody in Adults With Advanced Solid Tumors.,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/GS-1811%20(H&N).aspx
+Head/Neck,Interventional,Metastatic Trials,Line2,SGNDV-005 (Cohort 1),A Phase 2 Basket Study of Disitamab Vedotin in Adult Subjects with Previously Treated Locally-Advanced Unresectable or Metastatic Solid Tumors That Express HER2.,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/SGNDV-005%20(Cohort%201).aspx
+Head/Neck,Interventional,Metastatic Trials,Line2,ABBV-CLS-484,A Phase 1 Study with ABBV-CLS-484 Alone and in Combination in Subjects with Locally Advanced or Metastatic Tumors.,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/ABBV-CLS-484-Alone-or-in-Combo-with-Pembro-or-Cabo.aspx
+Head/Neck,Interventional,Metastatic Trials,Line3+,ABBV-CLS-484,A Phase 1 Study with ABBV-CLS-484 Alone and in Combination in Subjects with Locally Advanced or Metastatic Tumors.,https://365utsouthwestern.sharepoint.com/sites/MPOPClinicalTrials/SitePages/ABBV-CLS-484-Alone-or-in-Combo-with-Pembro-or-Cabo.aspx
+Head/Neck,Non-Interventional,Postop/Adjuvant,,,,
+Head/Neck,Non-Interventional,Metastatic Trials,,,,
 Breast,Interventional,Neoadjuvant Trials,,,,
 Breast,Interventional,Adjuvant Trials,,,,
 Breast,Interventional,Metastatic Trials,Line1,,,

@@ -250,15 +250,15 @@ def csv_to_cytoscape_json_stubbed():
         #     debug_log(f"About to check if node id {node} has trial_code descendants")
         #     if not does_node_have_trial_code_descendants(G, node):
         #         debug_log(f"No trial codes found for node id {node}")
-        #         no_trials_id = f"{node}_no_trials"
-        #         G.add_node(no_trials_id, id=no_trials_id, label="No Trials", type='no_trials', color=COLOR_MAP['yellow'], outline='black', classes='hidden')
+        #         no_trials_available_id = f"{node}_no_trials_available"
+        #         G.add_node(no_trials_available_id, id=no_trials_available_id, label="No Trials", type='no_trials_available', color=COLOR_MAP['yellow'], outline='black', classes='hidden')
 
         #         # Remove all outbound edges from this node
         #         for _, target in list(G.out_edges(node)):
         #             debug_log(f"Removing edge from {node} to {target}")
         #             G.remove_node(target)
         #             debug_log(f"Removed edge from {node} to {target}")
-        #         G.add_edge(node, no_trials_id, arrow=True, classes='hidden')
+        #         G.add_edge(node, no_trials_available_id, arrow=True, classes='hidden')
 
         removed_nodes = set()  # Track nodes that have been removed
 
@@ -277,8 +277,8 @@ def csv_to_cytoscape_json_stubbed():
             if G.nodes[node]['type'] == 'trial_code':
                 continue
             if not does_node_have_trial_code_descendants(G, node):
-                no_trials_id = f"{node}_no_trials"
-                G.add_node(no_trials_id, id=no_trials_id, label="No Trials", type='no_trials', color=COLOR_MAP['yellow'], outline='black', classes='hidden')
+                no_trials_available_id = f"{node}_no_trials_available"
+                G.add_node(no_trials_available_id, id=no_trials_available_id, label="No Trials Available", type='no_trials_available', color=COLOR_MAP['yellow'], outline='black', classes='hidden')
 
                 # Remove all outbound edges from this node and recursively remove descendants
                 for _, target in list(G.out_edges(node)):
@@ -286,7 +286,7 @@ def csv_to_cytoscape_json_stubbed():
                     remove_all_descendants(G, target)  # Remove all downstream nodes
                     G.remove_node(target)  # Remove the immediate target node
                     removed_nodes.add(target)
-                G.add_edge(node, no_trials_id, arrow=True, classes='hidden')
+                G.add_edge(node, no_trials_available_id, arrow=True, classes='hidden')
 
         # Convert NetworkX graph to Cytoscape-compatible format
         nodes = []

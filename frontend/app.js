@@ -67,8 +67,10 @@ document.addEventListener('DOMContentLoaded', () => {
       ...data.elements.nodes.map(node => ({
         data: {
           ...node.data,
-          label: node.data.label.replace(/\//g, '/ '), // Insert space after '/' for wrapping
-        },
+          label: node.data.label.includes("Melanoma/Cutaneous/Sarcoma")
+              ? node.data.label.replace(/\//g, '/ ')
+              : node.data.label,
+      },      
         classes: categorySelect.value === 'All' && node.data.type !== 'oncology_category' ? 'hidden' : ''
       })),
       ...data.elements.edges.map(edge => ({
